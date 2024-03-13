@@ -1,0 +1,38 @@
+.chatHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .chatHeaderLeft{
+        color: #fff;
+        span{
+            color: #7b7c85;
+            margin-right: 8px;
+        }
+    }
+
+    .chatHeaderRight{
+        display: flex;
+        gap:8px;
+        color: #fff;
+
+        .chatHeaderSearch{
+            display: flex;
+            background-color: #33363d;
+            border-radius: 3px;
+
+            input{
+                background:transparent;
+                outline: none;
+                border:none;
+                color: #fff;
+                padding: 0 8px;   
+            }
+        }
+
+        .MuiSvgIcon-root{
+            color: #7b7c85;
+            cursor: pointer;
+        }
+    }
+}

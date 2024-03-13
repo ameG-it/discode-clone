@@ -1,0 +1,31 @@
+
+
+.massage{
+    display: flex;
+    align-items: center;
+    
+    .massageUserIcon{
+        width: 56px;
+        height: 56px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+            
+    }
+    
+    .massageInfo{
+        margin: 16px 16px;
+        color: #fff;
+        text-align: left;
+        .timeStamp{
+            margin-left: 16px;
+            color: #7b7c85;
+        }
+        p{
+            margin-top: 8px;
+        }
+    }
+}
+

@@ -1,0 +1,110 @@
+
+.sidebar{
+    display: flex;
+    height: 100vh;
+    .sidebarLeft{
+        display: flex;
+        flex-direction: column;
+        background-color: #1a1c20;
+        padding: 16px 8px;
+        gap: 8px;
+    
+        .serverIcon{
+            background-color: #33363d;
+            border-radius: 9999px;
+            width: 56px;
+            height: 56px;
+            position: relative;
+            
+            img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 48px;
+                height: 48px;
+                transform: translate(-50%,-50%);
+            }
+        }
+    }
+
+    .sidebarRight{
+        background-color: #2b2d33;
+        width: 300px;
+        padding: 16px 24px;
+
+        .sidebarTop{
+            margin: 16px 0 0 0;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebarChanels{
+            margin: 24px 0 0 0;
+            .sidebarChanelsHeader{
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .sidebarChanelsTitle{
+                    display: flex;
+                    align-items: center;
+
+                }
+            }
+        }
+        
+        
+        .sidebarFooter{
+            border-top:1px solid #686a68;
+            padding: 16px 0;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 300px;
+            .sidebarAccount{
+                display: flex;
+                align-items: center;
+                .account{
+                    margin-left: 8px;
+                    text-align: left;
+                    h4{
+                        color: #fff;
+                    }
+                    span{
+                        color: #7b7c85;
+                    }
+                }
+                .fotterLogo{
+                    object-fit:cover;
+                    border-radius: 9999px;
+                    width: 56px;
+                    height: 56px;
+                    background-color: #7b7c85;
+                    position: relative;            
+                    img{
+                        border-radius: 9999px;
+                        position: absolute;
+                        width: 56px;
+                        top: 50%;
+                        left:50%;
+                        transform: translate(-50%,-50%);
+                    }
+                }
+                
+                
+            }
+            .sidebarVoice{
+                color: #7b7c85;
+            }
+        }
+    }
+}
+
+
+
+
+
