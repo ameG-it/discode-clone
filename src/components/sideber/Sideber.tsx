@@ -63,7 +63,7 @@ function Sideber() {
             <AddIcon/>
           </div>
           {channels.map((channel)=>{
-            return <SidebarChannel channel={channel} id={channel.id}/>
+            return <SidebarChannel channel={channel} id={channel.id} key={channel.id}/>
           })}
           <div className='sidebarFooter'>
             <div className='sidebarAccount'>
