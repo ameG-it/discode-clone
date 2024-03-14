@@ -11,6 +11,14 @@ npm install
 ### 認証キーの設定
 .envファイルにFireBaseの認証情報を記入してください、
 
+```
+REACT_APP_APIKEY=your_parameter
+REACT_APP_AUTHDOMAIN=your_parameter
+REACT_APP_PROJECTID=your_parameter
+REACT_APP_STORAGEBUCKET=your_parameter
+REACT_APP_MESSAGINGSENDERID=your_parameter
+REACT_APP_APPID=your_parameter
+```
 
 ## 詰まったところ
 
