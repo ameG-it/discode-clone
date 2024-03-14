@@ -7,10 +7,8 @@ import { store } from './app/store';
 
 
 import { ErrorBoundary } from "react-error-boundary" ; //エラー詳細を出力するためのモジュール
+console.log(process.env.REACT_APP_APIKEY)
 
-// Firebaseの接続情報を環境変数から取得
-import dotenv from 'dotenv';
-dotenv.config();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

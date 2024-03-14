@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Sideber.scss'
 import SidebarChannel from '../sidevarChannels/SidebarChannel';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -8,20 +8,30 @@ import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
-import { collection, query, QuerySnapshot, onSnapshot} from 'firebase/firestore';
+import { collection, query, QuerySnapshot, onSnapshot, DocumentData} from 'firebase/firestore';
+
+interface Channel {
+  id: string,
+  channel: DocumentData,
+  
+}
 
 function Sideber() {
+  const [channels,setChannels]=useState<Channel[]>([])
   const user = useAppSelector((state) => state.user)
   const q = collection(db, "channels");
   console.log(q);
   useEffect(()=>{
     onSnapshot(q,(QuerySnapshot)=>{
-      const channelsResult =[];
+      const channelsResults: Channel[] =[];
       QuerySnapshot.docs.forEach((doc)=>{
-        channelsResult.push(doc.data().name);
-      })
-      
-    })  
+        channelsResults.push({
+          id:doc.id,
+          channel:doc.data()});
+      });
+      setChannels(channelsResults)
+    })
+    
   },[])
 
   return (
@@ -52,10 +62,9 @@ function Sideber() {
             </div>
             <AddIcon/>
           </div>
-          <SidebarChannel/>
-          <SidebarChannel/>
-          <SidebarChannel/>
-
+          {channels.map((channel)=>{
+            return <SidebarChannel channel={channel} id={channel.id}/>
+          })}
           <div className='sidebarFooter'>
             <div className='sidebarAccount'>
               <div className='fotterLogo'>

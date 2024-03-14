@@ -7,12 +7,8 @@ import { useAppDispatch, useAppSelector } from './app/hooks'
 import { auth } from './firebase';
 import { login, logout } from './features/userSlice';
 
-
 function App() {
   const user = useAppSelector((state)=>state.user);
-  
-  console.log(user)
-  
   const dispath = useAppDispatch();
   useEffect(() => {
     auth.onAuthStateChanged((loginuser)=>{
