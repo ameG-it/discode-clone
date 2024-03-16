@@ -13,11 +13,8 @@ export const channelSlice = createSlice({
             state.channelId = action.payload.channelId;
             state.channelName = action.payload.channelName;
         },
-        setChannelInfoD:(state)=>{
-            state.channelId = null;
         }
-        }
-  });
+    });
 
   export const { setChannelInfo } = channelSlice.actions;
   export default channelSlice.reducer;
