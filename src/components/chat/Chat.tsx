@@ -7,12 +7,15 @@ import ChatMassage from './ChatMassage'
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import GifBoxIcon from '@mui/icons-material/GifBox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useAppSelector } from '../../app/hooks';
 
 
 function Chat() {
-  return (<div className='chat'>
+    const channelName = useAppSelector((state)=>state.channel.channelName);
+
+    return (<div className='chat'>
         {/* chat header */}
-        <ChatHeadar/>
+        <ChatHeadar channelName={channelName}/>
         {/* chat Massage */}
         <div className='chatMassage'>
             <ChatMassage/>
