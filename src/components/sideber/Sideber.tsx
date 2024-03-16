@@ -6,34 +6,14 @@ import AddIcon from '@mui/icons-material/Add';
 import MicIcon from '@mui/icons-material/Mic';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { auth, db } from '../../firebase';
+import { auth } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
-import { collection, query, QuerySnapshot, onSnapshot, DocumentData} from 'firebase/firestore';
-
-interface Channel {
-  id: string,
-  channel: DocumentData,
-  
-}
+import useCollection from '../../hooks/useCollection';
 
 function Sideber() {
-  const [channels,setChannels]=useState<Channel[]>([])
   const user = useAppSelector((state) => state.user)
-  const q = collection(db, "channels");
-  console.log(q);
-  useEffect(()=>{
-    onSnapshot(q,(QuerySnapshot)=>{
-      const channelsResults: Channel[] =[];
-      QuerySnapshot.docs.forEach((doc)=>{
-        channelsResults.push({
-          id:doc.id,
-          channel:doc.data()});
-      });
-      setChannels(channelsResults)
-    })
-    
-  },[])
-
+  const { documents:channels } = useCollection("channels");
+  
   return (
     <div className='sidebar'>
       {/* sideber-left */}
