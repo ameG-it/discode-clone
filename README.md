@@ -20,6 +20,12 @@ REACT_APP_MESSAGINGSENDERID=your_parameter
 REACT_APP_APPID=your_parameter
 ```
 
+### 起動
+ローカルで起動します。
+```
+npm start
+```
+
 ## 詰まったところ
 
 ### dotenv
