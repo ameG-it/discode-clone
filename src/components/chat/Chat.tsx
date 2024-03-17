@@ -6,11 +6,12 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import GifBoxIcon from '@mui/icons-material/GifBox';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useAppSelector } from '../../app/hooks';
-import { CollectionReference, DocumentData, DocumentReference, Timestamp, addDoc, collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { CollectionReference, DocumentData, DocumentReference, Timestamp, addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 
 interface Messages{
+    messageId:String,
     timeStamp:Timestamp,
     message:string,
     user:{
@@ -32,17 +33,20 @@ function Chat() {
 
     useEffect(()=>{
         let collectionRef = collection(db,"channels",String(channelId),"messages");
-        onSnapshot(collectionRef,(snapshot)=>{
+        const collectionOrderBy = query(collectionRef,orderBy("timeStamp","asc"));
+        onSnapshot(collectionOrderBy,(snapshot)=>{
             const results: Messages[]=[]
             snapshot.docs.forEach((doc)=>{
                 results.push({
+                    messageId: doc.data().id,
                     message: doc.data().message,
                     timeStamp:doc.data().timeStamp,
                     user:doc.data().user,
                 })
             })
+
+            
             setMessages(results);
-            console.log(results);
         });
     },[channelId])
 
@@ -52,7 +56,7 @@ function Chat() {
 
         const docRef:DocumentReference<DocumentData> = await addDoc(collectionRef, {
             message: inputText,
-            timestamp:serverTimestamp(),
+            timeStamp:serverTimestamp(),
             user: user,
         })
     }
@@ -68,6 +72,7 @@ function Chat() {
               e.preventDefault(); // デフォルトのEnterキーの挙動を抑制する
               console.log(hiddenButtonRef.current)
               hiddenButtonRef.current?.click(); // 隠しボタンをクリック
+              setInputText("")
             }
           }
       };
@@ -78,13 +83,20 @@ function Chat() {
         <ChatHeadar channelName={channelName}/>
         {/* chat Massage */}
         <div className='chatMassage'>
-            <ChatMassage/>
+            {messages.map((message, index)=>{
+                return <ChatMassage 
+                key={index}
+                messageId={message.messageId}
+                timeStamp={message.timeStamp}
+                message={message.message}
+                user={message.user}/>
+            })}
         </div>
         {/* chat Input */}
         <div className='chatInput'>
             <AddCircleIcon/>
             <form action="submit">
-                <textarea id="t_message" name="message" onKeyDown={(e:React.KeyboardEvent<HTMLTextAreaElement>)=>handleKeyDown(e)}rows={1} placeholder="メッセージを送信" onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>{setInputText(e.target.value)}}></textarea>
+                <textarea id="t_message" name="message" value={inputText} onKeyDown={(e:React.KeyboardEvent<HTMLTextAreaElement>)=>handleKeyDown(e)}rows={1} placeholder="メッセージを送信" onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>{setInputText(e.target.value)}}></textarea>
                 <button type='submit' className='chatInputbutton' ref={hiddenButtonRef}onClick={(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>sendMessage(e)}>送信</button>
             </form>
             <div className='chatInputIcons'>

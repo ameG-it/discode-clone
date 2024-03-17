@@ -3,18 +3,33 @@ import './ChatMassage.scss'
 
 /**MuiIcons */
 import {Avatar} from '@mui/material';
+import { Timestamp } from 'firebase/firestore';
 
-const ChatMassage = () => {
+type Props={
+  messageId:String,
+  timeStamp:Timestamp,
+  message:string,
+  user:{
+        uid: string;
+        photo: string;
+        email: string;
+        displayName: string;
+  }
+}
+
+
+const ChatMassage = (props:Props) => {
+  const {messageId, timeStamp, message, user}= props;
   return (
     <div className='massage'>
         <div className='massageUserIcon'>
-            <Avatar/>
+            <Avatar src={user?.photo}/>
         </div>
         <div className='massageInfo'>
-            <h4 >User Name
-                <span className='timeStamp'>2024.01.01</span>
+            <h4 >{user?.displayName}
+                <span className='timeStamp'>{new Date(timeStamp?.toDate()).toLocaleString()}</span>
             </h4>
-            <p>本文です</p>
+            <p>{message}</p>
         </div>
     </div>
   )
